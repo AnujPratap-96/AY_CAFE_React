@@ -25,10 +25,9 @@ function Body() {
     
     const dispatch = useDispatch();
     
-    
-    useEffect(()=>{
-        useGetRestaurantList(latitude , longitude , dispatch);
-    }, [latitude ,longitude])
+    useEffect(() => {
+        useGetRestaurantList(latitude, longitude, dispatch);
+    }, [latitude, longitude]);
     
     // Update filteredRestaurants when allRestaurants is updated
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
@@ -74,7 +73,7 @@ function Body() {
             </div>
 
             {/* Restaurants Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center mx-auto">
                 {filteredRestaurants.length > 0 ? (
                     filteredRestaurants.map((restaurant) => (
                         <Link to={"/restaurant/" + restaurant.info.id} key={restaurant.info.id}>
