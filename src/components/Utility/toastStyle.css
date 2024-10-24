@@ -1,0 +1,14 @@
+/* toastStyles.css */
+
+/* Default toast styling */
+.custom-toast-container .Toastify__toast {
+    max-width: 200px; /* Default max width */
+  }
+  
+  /* Small screen toast styling */
+  @media (max-width: 640px) {
+    .custom-toast-container .Toastify__toast {
+      max-width: 100px; /* Adjust width to 90% of the screen */
+    }
+  }
+  

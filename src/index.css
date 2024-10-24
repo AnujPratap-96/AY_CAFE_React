@@ -1,0 +1,65 @@
+/* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for dark and light themes */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Dark Theme Styles */
+.dark {
+  --bg-color: #1f2937; /* Gray-800 */
+  --text-color: #f9fafb; /* Gray-100 */
+}
+
+/* Light Theme Styles */
+:root {
+  --bg-color: #ffffff; /* White */
+  --text-color: #1f2937; /* Gray-800 */
+}
+
+/* Apply the CSS variables */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+@layer utilities {
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+  }
+
+  .underline-offset {
+      position: relative;
+  }
+
+  .underline-offset::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -0.1em;
+      /* Adjust the value as needed */
+      height: 2px;
+      /* Adjust the thickness as needed */
+      background-color: gray;
+
+  }
+
+  .underline-offset:hover::after {
+      background-color: orange;
+  }
+
+}
