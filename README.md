@@ -44,7 +44,7 @@ Welcome to the **Food Ordering Website**! 🚀 Your ultimate destination for dis
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/react-code.git
+   git clone https://github.com/AnujPratap96/AY_CAFE_React.git
    ```
 
 2. **Navigate to the project directory**:
