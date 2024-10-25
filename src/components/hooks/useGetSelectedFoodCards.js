@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {  SELECTED_FOOD_URL } from "../Utility/Data";
 import { useSelector } from "react-redux";
 
-export const useGetSelectedFoodCards = (collect_id) => {
+export const useGetSelectedFoodCards = (collection_id) => {
     const [header, setHeader] = useState([]);
     const [allCards, setAllCards] = useState([]);
   
@@ -11,7 +11,7 @@ export const useGetSelectedFoodCards = (collect_id) => {
   
     const getCards = async () => {
       try {
-        const data = await fetch(SELECTED_FOOD_URL(latitude , longitude , collect_id) );
+        const data = await fetch(SELECTED_FOOD_URL(latitude , longitude , collection_id) );
         const res = await data.json();
       
         const cards = res?.data?.cards;
