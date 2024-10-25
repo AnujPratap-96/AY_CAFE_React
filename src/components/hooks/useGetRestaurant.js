@@ -5,7 +5,7 @@ import { setLoading , setRestaurantData } from "../store/restaurantSlice";
 
 // Your Swiggy API URL, with placeholders for lat and lng
 export const SWIGGY_URL = (lat, lng) =>
-  `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${lng}&page_type=DESKTOP_WEB_LISTING`;
+  `https://ay-cafe-react.vercel.app/api/proxy/https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${lng}&page_type=DESKTOP_WEB_LISTING`;
 export const useGetRestaurantList = (latitude, longitude , dispatch) => {
 
 
