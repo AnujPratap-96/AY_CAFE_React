@@ -46,6 +46,8 @@ function Body() {
         return <Shimmer />;
     }
 
+    if(topRestaurants.length === 0) return <h1>No Restaurant Found</h1>
+
     return (
         <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-screen-lg mx-auto">
             {/* Whats On Mind and Top Restaurant Chains */}

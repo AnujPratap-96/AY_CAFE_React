@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { filterData } from "../Utility/helper";
+import { filterData } from "../hooks/filterData";
 
 export const FilterRestaurant = ({
   allrestaurant,

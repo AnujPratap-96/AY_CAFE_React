@@ -1,5 +1,5 @@
 import { useSearchParams , Link } from "react-router-dom";
-import { useGetSelectedFoodCards } from "../Utility/helper";
+import { useGetSelectedFoodCards } from "../hooks/useGetSelectedFoodCards";
 import RestaurantCard from "../Body/RestaurantCard";
 import SelectedFoodShimmer from "../Shimmer UI/SelectedFoodShimmer"
 

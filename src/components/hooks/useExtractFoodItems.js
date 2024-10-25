@@ -19,9 +19,9 @@ function useExtractFoodItems(data) {
             id: itemInfo.id, // Added id
             name: itemInfo.name,
             description: itemInfo.description, // Added description
-            price: itemInfo.price / 100,
+            price: itemInfo.price / 100 || Math.floor(itemInfo.id / 1000),
             isVeg: itemInfo.itemAttribute?.vegClassifier === 'VEG',
-            rating: itemInfo.ratings?.aggregatedRating?.rating || 'N/A',
+            rating: itemInfo.ratings?.aggregatedRating?.rating || '4.0',
             imageUrl: itemInfo.imageId ? `${IMG_URL}${itemInfo.imageId}` : null // Corrected image URL concatenation
           };
           

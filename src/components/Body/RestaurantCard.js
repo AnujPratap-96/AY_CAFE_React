@@ -37,7 +37,7 @@ export default function RestaurantCard({ Data }) {
               <FaStar className="text-white" />
             </span>
             <span className="text-sm font-medium text-gray-600 flex">
-              {avgRating}
+              {avgRating == NaN ? 4.0 : avgRating }
             </span>
           </div>
           {/* Dot between rating and delivery time */}
