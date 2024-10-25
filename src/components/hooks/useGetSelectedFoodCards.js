@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {  SELECTED_FOOD_URL } from "./Data";
+import {  SELECTED_FOOD_URL } from "../Utility/Data";
 import { useSelector } from "react-redux";
 
 export const useGetSelectedFoodCards = (collect_id) => {
