@@ -10,7 +10,7 @@ export const useGetRestaurantList = (latitude, longitude , dispatch) => {
 
 
   const fetchData = async () => {
-    if (!latitude || !longitude) return;
+    // if (!latitude || !longitude) return;
 
     try {
       dispatch(setLoading(true));
@@ -19,15 +19,17 @@ export const useGetRestaurantList = (latitude, longitude , dispatch) => {
 
       const cards = res?.data?.cards;
 
+
       // Prepare the data from response
       const whatsOnMindCards = cards[0]?.card?.card?.imageGridCards?.info || [];
       const whatsOnMindHeader = cards[0]?.card?.card?.header || "";
-      const topRestCard = cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+      const topRestCard = cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
       const topRestHeader = cards[1]?.card?.card?.header || "";
-      const allRestCards = cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+      // const allRestCards = cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
       const allRestHeader = cards[2]?.card?.card?.title || "";
 
       // Dispatch data to Redux store
+     
       dispatch(setRestaurantData({
         whatsOnMind: whatsOnMindCards,
         whatsHeader: whatsOnMindHeader,

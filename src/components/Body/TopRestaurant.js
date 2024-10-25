@@ -4,7 +4,7 @@ import { FaArrowLeft, FaArrowRight, FaStar } from "react-icons/fa"; // Import Fa
 import { GoDotFill } from "react-icons/go";
 import { Link } from "react-router-dom";
 
-const TopRestaurantChains = ({ topRestaurantHeader, TopRestaurant }) => {
+const TopRestaurantChains = ({ topRestaurantHeader, TopRestaurant , cityName }) => {
   const ScrollBar = useRef();
 
   const scrollLeft = () => {
@@ -19,7 +19,7 @@ const TopRestaurantChains = ({ topRestaurantHeader, TopRestaurant }) => {
     <div className="my-10 flex flex-col">
       <div className="flex justify-between">
         <h1 className="text-lg lg:text-2xl font-bold ml-3 font-Poppins">
-          {topRestaurantHeader.title}
+          {topRestaurantHeader ? topRestaurantHeader.title : `Top restaurant chains in ${cityName}`}
         </h1>
         <span className="flex gap-3 self-end">
           <span>

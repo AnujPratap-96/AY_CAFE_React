@@ -11,7 +11,7 @@ import { useGetRestaurantList } from "../hooks/useGetRestaurant"; // Import the 
 function Body() {
     const [searchInput, setSearchInput] = useState("");
     const [noRestaurant, setNoRestaurant] = useState("");
-    const { latitude, longitude } = useSelector((store) => store.sidebar); // Access lat/lng from Redux
+    const { latitude, longitude , cityName } = useSelector((store) => store.sidebar); // Access lat/lng from Redux
     
     const {
         whatsOnMind,
@@ -26,12 +26,16 @@ function Body() {
     const dispatch = useDispatch();
     
     useEffect(() => {
+        
+        if(latitude && longitude){
         useGetRestaurantList(latitude, longitude, dispatch);
+        }
     }, [latitude, longitude]);
     
     // Update filteredRestaurants when allRestaurants is updated
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     useEffect(() => {
+     
         if (allRestaurants.length > 0) {
             setFilteredRestaurants(allRestaurants);
         }
@@ -45,17 +49,19 @@ function Body() {
     return (
         <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-screen-lg mx-auto">
             {/* Whats On Mind and Top Restaurant Chains */}
-            <div className="w-full mx-auto mb-5">
-                <WhatsOnMind WhatsOnMind={whatsOnMind} header={whatsHeader} />
+            <div className="w-full mx-auto mb-5"> 
+            {whatsOnMind.length > 0 ? (   <WhatsOnMind WhatsOnMind={whatsOnMind} header={whatsHeader} /> ) : null  }
                 <TopRestaurantChains
                     topRestaurantHeader={topRestHeader}
                     TopRestaurant={topRestaurants}
+                    cityName = {cityName}
                 />
             </div>
+            
 
             {/* Search Bar */}
             <h1 className="font-Poppins font-bold text-lg lg:text-2xl ml-1 mb-10">
-                {allRestHeader}
+                {allRestHeader ? allRestHeader : `Restaurants with online food delivery in ${cityName}`}
             </h1>
             <div className="mb-6 flex flex-col sm:flex-row justify-start items-center gap-2">
                 <SearchInputBox 
