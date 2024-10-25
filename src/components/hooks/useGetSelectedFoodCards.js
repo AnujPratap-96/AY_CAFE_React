@@ -11,7 +11,7 @@ export const useGetSelectedFoodCards = (collect_id) => {
   
     const getCards = async () => {
       try {
-        const data = await fetch(SELECTED_FOOD_URL(latitude , longitude) + collect_id);
+        const data = await fetch(SELECTED_FOOD_URL(latitude , longitude , collect_id) );
         const res = await data.json();
       
         const cards = res?.data?.cards;

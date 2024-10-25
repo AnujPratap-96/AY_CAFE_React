@@ -9,4 +9,4 @@ export const SWIGGY_URL = `https://www.swiggy.com/dapi/restaurants/list/v5?lat=2
 
 export const SWIGGY_MENU_API_URL = (lat , lng) => `https://ay-cafe-react.vercel.app/api/proxy?lat=${lat}&lng=${lng}&type=menu&restaurantId=`;
 
-export const SELECTED_FOOD_URL = (lat , lng) => `https://ay-cafe-react.vercel.app/api/proxy?lat=${lat}&lng=${lng}&type=pizzaList&collection=`;
+export const SELECTED_FOOD_URL = (lat , lng ,collection_id) => `https://ay-cafe-react.vercel.app/api/proxy?lat=${lat}&lng=${lng}&type=pizzaList&collection=${collection_id}`;
