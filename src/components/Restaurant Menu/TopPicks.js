@@ -3,19 +3,19 @@ import { useRef } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { IMG_URL } from "../Utility/Data";
+import { useSelector } from "react-redux"; // Importing useSelector
 
 const TopPicks = ({ resInfo }) => {
   const topPicksScrollBar = useRef();
-  
+  const theme = useSelector((store) => store.sidebar.theme); // Access theme from Redux
 
-  const  {card}  =
-    resInfo?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card 
-   || resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card ;
+  const {
+    card
+  } =
+    resInfo?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card ||
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card;
 
-
-
-  const  {itemCards}  = card;
-  
+  const { itemCards } = card;
 
   const scrollTopPicksLeft = () => {
     topPicksScrollBar.current.scrollLeft =
@@ -26,11 +26,12 @@ const TopPicks = ({ resInfo }) => {
     topPicksScrollBar.current.scrollLeft =
       topPicksScrollBar.current.scrollLeft - 1210;
   };
+
   return (
     itemCards && (
       <div className="TopPicks mx-2 my-10">
         <div className="flex justify-between my-2">
-          <h2 className="self-start font-bold text-2xl font-Poppins mb-2">
+          <h2 className="self-start font-bold text-2xl font-Poppins mb-2" style={{ color: theme.textColor }}>
             {card.title}
           </h2>
           <div className="flex gap-2">
@@ -38,6 +39,7 @@ const TopPicks = ({ resInfo }) => {
               <FaArrowLeft
                 size={33}
                 className="bg-gray-200 rounded-full p-2 opacity-70 hover:opacity-100 cursor-pointer"
+                style={{ backgroundColor: theme.backgroundColor, color: theme.textColor }} // Update button color
                 onClick={scrollTopPicksRight}
               />
             </span>
@@ -45,6 +47,7 @@ const TopPicks = ({ resInfo }) => {
               <FaArrowRight
                 size={33}
                 className="bg-gray-200 rounded-full p-2 opacity-70 hover:opacity-100 cursor-pointer"
+                style={{ backgroundColor: theme.backgroundColor, color: theme.textColor }} // Update button color
                 onClick={scrollTopPicksLeft}
               />
             </span>
@@ -52,12 +55,12 @@ const TopPicks = ({ resInfo }) => {
         </div>
 
         <div
-          className=" flex flex-nowrap gap-5 overflow-x-auto scroll-smooth no-scrollbar "
+          className="flex flex-nowrap gap-5 overflow-x-auto scroll-smooth no-scrollbar"
           ref={topPicksScrollBar}
         >
           {itemCards.map((card) => (
             <div
-              className="flex-shrink-0  flex-grow-0 basis-auto"
+              className="flex-shrink-0 flex-grow-0 basis-auto"
               key={card.card.info.id}
             >
               <img

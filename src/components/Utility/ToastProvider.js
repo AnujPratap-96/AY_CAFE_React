@@ -1,9 +1,12 @@
 import React from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { useSelector } from 'react-redux'; // Import useSelector
 import "react-toastify/dist/ReactToastify.css";
 import "./toastStyle.css"; // Import the custom styles
 
 export default function ToastProvider() {
+  const theme = useSelector((store) => store.sidebar.theme); // Access theme from Redux
+
   return (
     <>
       <ToastContainer
@@ -17,7 +20,9 @@ export default function ToastProvider() {
         draggable
         pauseOnHover
         theme="light"
-        toastClassName="custom-toast-container" // Add custom class
+        toastClassName={`custom-toast-container ${theme.textColor}`} // Use theme.textColor
+        bodyClassName={`${theme.textColor}`} // Set text color for toast body
+        style={{ backgroundColor: theme.backgroundColor }} // Set background color for toasts
       />
     </>
   );

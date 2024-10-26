@@ -1,18 +1,27 @@
 import React from 'react';
+import { useSelector } from 'react-redux'; // Import useSelector
 
 export default function ContactUS() {
+  const theme = useSelector((store) => store.sidebar.theme); // Access theme from Redux
+
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Contact Us</h1>
+    <div className="max-w-3xl mx-auto p-6" style={{ backgroundColor: theme.backgroundColor }}>
+      <h1 className="text-3xl font-bold mb-6" style={{ color: theme.textColor }}>
+        Contact Us
+      </h1>
 
       <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Get in Touch</h2>
-        <p className="text-gray-700 mb-4">
+        <h2 className="text-xl font-semibold mb-4" style={{ color: theme.textColor }}>
+          Get in Touch
+        </h2>
+        <p className="mb-4" style={{ color: theme.subtextColor }}>
           If you have any questions or need assistance, please feel free to reach out to us using the contact form below or via email.
         </p>
         <form className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-lg font-medium text-gray-700">Name</label>
+            <label htmlFor="name" className="block text-lg font-medium" style={{ color: theme.textColor }}>
+              Name
+            </label>
             <input
               type="text"
               id="name"
@@ -24,7 +33,9 @@ export default function ContactUS() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-lg font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-lg font-medium" style={{ color: theme.textColor }}>
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -36,7 +47,9 @@ export default function ContactUS() {
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-lg font-medium text-gray-700">Message</label>
+            <label htmlFor="message" className="block text-lg font-medium" style={{ color: theme.textColor }}>
+              Message
+            </label>
             <textarea
               id="message"
               name="message"
@@ -57,15 +70,17 @@ export default function ContactUS() {
       </div>
 
       <div>
-        <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
-        <p className="text-gray-700 mb-2">
-          <strong>Address:</strong> Bareilly Uttar Pradesh India
+        <h2 className="text-xl font-semibold mb-4" style={{ color: theme.textColor }}>
+          Contact Information
+        </h2>
+        <p className="mb-2" style={{ color: theme.subtextColor }}>
+          <strong>Address:</strong> Bareilly, Uttar Pradesh, India
         </p>
-        <p className="text-gray-700 mb-2">
+        <p className="mb-2" style={{ color: theme.subtextColor }}>
           <strong>Phone:</strong> +91 9690328394
         </p>
-        <p className="text-gray-700 mb-2">
-          <strong>Email:</strong> offcialthakur94@gmail.com
+        <p className="mb-2" style={{ color: theme.subtextColor }}>
+          <strong>Email:</strong> officialthakur94@gmail.com
         </p>
       </div>
     </div>

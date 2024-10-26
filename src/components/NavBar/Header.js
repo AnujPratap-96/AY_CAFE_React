@@ -1,4 +1,4 @@
-import { FaBars, FaTimes, FaWifi, FaUser, FaTimesCircle, FaHome, FaInfoCircle, FaPhone, FaShoppingCart } from 'react-icons/fa';
+import { FaBars, FaTimes, FaWifi, FaUser, FaTimesCircle, FaHome, FaInfoCircle, FaPhone, FaShoppingCart, FaMoon, FaSun } from 'react-icons/fa';
 import { useState, useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import AY_CAFE from "../../../public/AY_CAFE.webp";
@@ -7,6 +7,7 @@ import { UserContext } from '../hooks/UserContext';
 import { useSelector, useDispatch } from 'react-redux';
 import { RxCaretDown } from "react-icons/rx";
 import { handleClick } from '../hooks/useGetLogitude-latitude';
+import { toggleTheme } from '../store/sidebarSlice';
 
 export default function Header() {
   const isOnline = useOnline();
@@ -16,6 +17,7 @@ export default function Header() {
   const cartItems = useSelector((store) => store.cart.items);
   const city = useSelector((store) => store.sidebar.cityName);
   const state = useSelector((store) => store.sidebar.state);
+  const theme = useSelector((store) => store.sidebar.theme);
   const dispatch = useDispatch();
 
   const [toggle, setToggle] = useState(false);
@@ -39,12 +41,12 @@ export default function Header() {
     <>
       {/* Sidebar Overlay */}
       <div
-        className={`black-overlay w-full h-full fixed top-0 left-0 z-50 duration-500 ${toggle ? "visible opacity-100" : "invisible opacity-0"}`}
+        className={`w-full h-full fixed top-0 left-0 z-50 duration-500 ${toggle ? "visible opacity-100" : "invisible opacity-0"}`}
         onClick={hideSideMenu}
       >
         <div
-          className="w-[300px] h-full bg-white fixed left-0 top-0 z-50 duration-[400ms] p-6 shadow-lg"
-          style={{ transform: toggle ? "translateX(0)" : "translateX(-100%)" }}
+          className="w-[300px] h-full fixed left-0 top-0 z-50 duration-[400ms] p-6 shadow-lg"
+          style={{ transform: toggle ? "translateX(0)" : "translateX(-100%)", backgroundColor: theme.backgroundColor }}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Sidebar content */}
@@ -53,6 +55,7 @@ export default function Header() {
               <input
                 type="text"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                style={{color : theme.textColor , backgroundColor : theme.backgroundColor}}
                 placeholder="Search for city..."
                 value={cityName}
                 onChange={(e) => setCityName(e.target.value)}
@@ -65,7 +68,7 @@ export default function Header() {
         </div>
       </div>
 
-      <header className="bg-white shadow-lg sticky top-0 z-40 py-3 px-2">
+      <header className="shadow-lg sticky top-0 z-40 py-3 px-2" style={{ backgroundColor: theme.backgroundColor, color: theme.textColor }}>
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           
           {/* Container for Logo and City/State Details */}
@@ -76,9 +79,9 @@ export default function Header() {
             </NavLink>
 
             {/* Sidebar toggle (show only city on small screens) */}
-            <div className="text-[#686b78] cursor-pointer flex " onClick={showSideMenu}>
+            <div className="cursor-pointer flex" onClick={showSideMenu} style={{ color: theme.subtextColor }}>
               <span className="sm:hidden">{city}, {state}</span> 
-              <span className="hidden sm:inline"><span className='text-orange-500 underline decoration-black decoration-2'>{city}</span>, {state}, India</span> {/* Show full city and state on larger screens */}
+              <span className="hidden sm:inline"><span className='text-orange-500 underline decoration-orange decoration-2'>{city}</span>, {state}, India</span> {/* Show full city and state on larger screens */}
               <RxCaretDown fontSize={25} className="text-[#ec8f43]" />
             </div>
           </div>
@@ -95,34 +98,39 @@ export default function Header() {
               <FaPhone className="inline-block mr-2" />Contact Us
             </NavLink>
             <NavLink to="/cart" className={({ isActive }) => isActive ? 'underline text-orange-500' : 'hover:text-orange-500 transition duration-500'}>
-              <FaShoppingCart className="inline-block mr-2" />Cart<sup data-testid ="cart-id" className="text-orange-400 font-semibold">{cartItems.length}</sup>
+              <FaShoppingCart className="inline-block mr-2" />Cart<sup data-testid="cart-id" className="text-orange-400 font-semibold">{cartItems.length}</sup>
             </NavLink>
             
             {/* Online Status */}
-            <p data-testid = "online-status" className="hidden lg:flex items-center">
+            <p data-testid="online-status" className="hidden lg:flex items-center" style={{ color: theme.subtextColor }}>
               {isOnline ? <FaWifi className="text-green-500 mr-2" /> : <FaTimesCircle className="text-red-500 mr-2" />}
               {isOnline ? 'Online' : 'Offline'}
             </p>
-            <div>
-
+            
             {/* User Login/Logout */}
-            {user ? (
-              <div className="flex items-center lg:gap-4 gap-1">
-                <p>{`Hello, ${username || 'User'}`}</p>
-                <button onClick={handleLogout} className="lg:px-3 py-1.5 rounded-2xl border border-red-500 text-red-500 hover:text-white hover:bg-red-500 transition duration-500">
-                  <FaTimesCircle className="inline-block " /> Logout
-                </button>
-              </div>
-            ) : (
-              <NavLink to="/login" className="px-3 py-1.5 rounded-2xl border border-orange-500 text-orange-500 hover:text-white hover:bg-orange-500 transition duration-500">
-                <FaUser className="inline-block mr-2" /> Login
-              </NavLink>
-            )}
+            <div>
+              {user ? (
+                <div className="flex items-center lg:gap-4 gap-1">
+                  <p style={{ color: theme.textColor }}>Hello, {username || 'User'}</p>
+                  <button onClick={handleLogout} className="lg:px-3 py-1.5 rounded-2xl border border-red-500 text-red-500 hover:text-white hover:bg-red-500 transition duration-500">
+                    <FaTimesCircle className="inline-block " /> Logout
+                  </button>
+                </div>
+              ) : (
+                <NavLink to="/login" className="px-3 py-1.5 rounded-2xl border border-orange-500 text-orange-500 hover:text-white hover:bg-orange-500 transition duration-500">
+                  <FaUser className="inline-block mr-2" /> Login
+                </NavLink>
+              )}
             </div>
           </nav>
 
+          {/* Theme Toggle Button */}
+          <button onClick={() => dispatch(toggleTheme())} className="text-2xl" style={{ color: theme.textColor }}>
+            {theme.backgroundColor === '#ffffff' ? <FaMoon /> : <FaSun />}
+          </button>
+
           {/* Mobile Menu Icon */}
-          <div className="md:hidden cursor-pointer text-3xl" onClick={toggleMenu}>
+          <div className="md:hidden cursor-pointer text-3xl" onClick={toggleMenu} style={{ color: theme.textColor }}>
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </div>
         </div>
@@ -146,7 +154,7 @@ export default function Header() {
             {/* User Login/Logout for Mobile */}
             {user ? (
               <button onClick={handleLogout} className="px-3 py-1.5 rounded-2xl border border-red-500 text-red-500 hover:text-white hover:bg-red-500 transition duration-500">
-                <FaTimesCircle className="inline-block " />Logout
+                <FaTimesCircle className="inline-block " /> Logout
               </button>
             ) : (
               <NavLink to="/login" className="px-3 py-1.5 rounded-2xl border border-orange-500 text-orange-500 hover:text-white hover:bg-orange-500 transition duration-500">

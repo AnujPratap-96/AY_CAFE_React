@@ -1,9 +1,12 @@
+import { useSelector } from "react-redux";
 const SelectedFoodShimmer = () => {
+  const {backgroundColor} = useSelector((store) => store.sidebar.theme)
   return (
-    <div className="mt-5 px-4 sm:px-6 lg:px-10 mx-auto flex flex-wrap flex-col">
+    <div className="mt-5 px-4 sm:px-6 lg:px-10 mx-auto flex flex-wrap flex-col"
+    style={{backgroundColor: backgroundColor}}>
       {/* Shimmer Header */}
       <div className="my-3 w-full md:w-1/4 lg:w-1/2 p-3 bg-gradient-to-t mx-auto md:ml-4 from-gray-300 shadow-lg rounded-xl animate-pulse">
-        <div className="bg-white rounded-xl p-3">
+        <div className=" rounded-xl p-3">
           <div className="h-8 bg-gray-300 rounded w-2/3 mb-3"></div>
           <div className="h-6 bg-gray-300 rounded w-1/3"></div>
         </div>

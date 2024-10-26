@@ -1,76 +1,70 @@
-import React from "react";
+import React, { useRef } from "react";
 import { IMG_URL } from "../Utility/Data";
-import { FaArrowLeft } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
-import { useRef } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-const WhatsOnMind = ({ WhatsOnMind , header}) => {
-  // console.log(foodItemImages);
+
+const WhatsOnMind = ({ WhatsOnMind, header }) => {
   const ScrollBar = useRef();
-  // console.log(foodItemImages);
+  const theme = useSelector((store) => store.sidebar.theme); // Access theme from Redux
+
   const scrollLeft = () => {
-    ScrollBar.current.scrollLeft = ScrollBar.current.scrollLeft + 950;
-    // console.log(ScrollBar);
+    ScrollBar.current.scrollLeft += 950;
   };
 
   const scrollRight = () => {
-    ScrollBar.current.scrollLeft = ScrollBar.current.scrollLeft - 950;
-    // console.log(ScrollBar);
+    ScrollBar.current.scrollLeft -= 950;
   };
 
   const findCollectionId = (givenURL) => {
-    const url = givenURL;
-    // Define a regex pattern to capture the 'collection_id' value
     const regex = /[?&]collection_id=([^&]+)/;
-
-    // Find the match
-    const match = regex.exec(url);
-
-    // If there's a match, extract the first capture group (the collection_id value)
-    const collectionId = match ? match[1] : null;
-
-    return collectionId; // Output: 83644
+    const match = regex.exec(givenURL);
+    return match ? match[1] : null;
   };
+
   return (
-    <div className="food-items">
-      <h1 className="font-Poppins font-bold text-lg lg:text-2xl ml-3 ">
+    <div className="my-10">
+      <h1 className="font-Poppins font-bold text-lg lg:text-2xl ml-3" style={{ color: theme.textColor }}>
         {header.title}
       </h1>
-      <div className=" flex flex-col ">
+      <div className="flex flex-col mt-4">
         <div className="flex gap-3 self-end">
           <span>
             <FaArrowLeft
               size={33}
-              className="bg-gray-200 rounded-full p-2 opacity-70 hover:opacity-100 cursor-pointer"
+              className="rounded-full p-2 opacity-70 hover:opacity-100 cursor-pointer"
+              style={{ backgroundColor: theme.backgroundColor }}
               onClick={scrollRight}
             />
           </span>
           <span>
             <FaArrowRight
               size={33}
-              className="bg-gray-200 rounded-full p-2 opacity-70 hover:opacity-100 cursor-pointer"
+              className="rounded-full p-2 opacity-70 hover:opacity-100 cursor-pointer"
+              style={{ backgroundColor: theme.backgroundColor }}
               onClick={scrollLeft}
             />
           </span>
         </div>
         <div
-          className="flex flex-nowrap overflow-x-auto scroll-smooth no-scrollbar"
+          className="flex flex-nowrap mt-3 overflow-x-auto scroll-smooth no-scrollbar"
           ref={ScrollBar}
         >
           {WhatsOnMind.map((item) => (
             <div
-              className="flex-grow-0 flex-shrink-0 basis-auto hover:scale-105 transition-all"
+              className="flex-grow-0 flex-shrink-0 basis-auto hover:scale-105 transition-all m-2"
               key={item.id}
+              style={{ backgroundColor: theme.backgroundColor,  borderRadius: "10px" }}
             >
-              <Link
-                to={
-                  "/selectedDish?collectionID=" +
-                  findCollectionId(item.action.link)
-                }
-              >
+              <Link to={"/selectedDish?collectionID=" + findCollectionId(item.action.link)}>
                 <img
                   src={IMG_URL + item.imageId}
-                  className="h-32 lg:h-40 w-32 lg:w-40 cursor-pointer"
+                  className="h-32 lg:h-40 w-32 lg:w-40 cursor-pointer rounded-lg"
+                  alt={item.title}
+                  style={{
+                    backgroundColor: theme.backgroundColor, // Ensure the image blends well with the theme background
+                    filter: `brightness(${theme.backgroundColor === "#1a1a1a" ? "0.8" : "1"})`, // Adjust brightness based on theme
+                  }}
                 />
               </Link>
             </div>

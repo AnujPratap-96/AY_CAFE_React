@@ -1,12 +1,21 @@
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'; // Importing social icons
+import { useSelector } from 'react-redux'; // Importing useSelector
 
 export default function Footer() {
+  const theme = useSelector((store) => store.sidebar.theme); // Access theme from Redux
+
   return (
-    <footer className="bg-gray-900 text-white py-2 bottom-0 w-full">
+    <footer 
+      style={{ 
+        backgroundColor: theme.backgroundColor, 
+        boxShadow: '0 -4px 10px rgba(0, 0, 0, 0.1)' // Apply the shadow directly here
+      }} 
+      className="text-white py-2 bottom-0 w-full relative" // Removed shadow-md to avoid conflict
+    >
       <div className="container mx-auto flex flex-col justify-center items-center px-4">
         
         {/* Company Info */}
-        <div className="text-center mb-3">
+        <div className="text-center mb-3" style={{ color: theme.textColor }}>
           <h1 className="text-2xl font-bold tracking-wider">AY CAFE</h1>
           <p className="text-sm mt-2">© 2024 All rights reserved</p>
         </div>
@@ -40,8 +49,10 @@ export default function Footer() {
         </div>
 
         {/* Made by Section */}
-        <div className="text-center">
-          <p className="text-sm">Made with ❤️ by <span className="font-semibold">Anuj Pratap Singh 🚀</span></p>
+        <div className="text-center" style={{ color: theme.subtextColor }}>
+          <p className="text-sm">
+            Made with ❤️ by <span className="font-semibold">Anuj Pratap Singh 🚀</span>
+          </p>
         </div>
       </div>
     </footer>

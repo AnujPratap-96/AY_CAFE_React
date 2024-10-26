@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 const CartItems = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((store) => store.cart.items);
+  const theme = useSelector((store) => store.sidebar.theme); // Access theme from Redux
 
   // Function to handle removing an item by its name
   const handleDeleteClick = (name) => {
@@ -20,9 +21,11 @@ const CartItems = () => {
   };
 
   return (
-    <div className=" flex flex-col w-full lg:w-[60%]">
+    <div className="flex flex-col w-full lg:w-[60%]" style={{ backgroundColor: theme.backgroundColor }}>
       <div className="justify-between ml-6 items-center flex">
-        <h2 className="font-medium text-2xl font-Poppins">CART 🛒</h2>
+        <h2 className="font-medium text-2xl font-Poppins" style={{ color: theme.textColor }}>
+          CART 🛒
+        </h2>
         <button
           className="bg-orange-500 hover:bg-orange-600 transition-all text-white p-2 rounded-lg my-2 w-fit self-center"
           onClick={handleClearCart}
@@ -32,8 +35,8 @@ const CartItems = () => {
       </div>
 
       {cartItems.map((item, index) => (
-        <div className=" w-full gap-4 flex my-2 shadow-2xl rounded-xl px-3" key={index}>
-          <div className=" flex flex-col items-center lg:w-1/4">
+        <div className="w-full gap-4 flex my-2 shadow-2xl rounded-xl px-3" key={index}>
+          <div className="flex flex-col items-center lg:w-1/4">
             <img
               src={item.imageUrl}
               alt={item.name}
@@ -64,7 +67,7 @@ const CartItems = () => {
                     alt="non-veg symbol"
                   />
                 )}
-                <span className="text-lg font-Poppins font-medium">
+                <span className="text-lg font-Poppins font-medium" style={{ color: theme.textColor }}>
                   {item.name}
                 </span>
               </div>
@@ -74,17 +77,16 @@ const CartItems = () => {
                 <div className="flex items-center justify-center bg-green-500 rounded-full w-6 h-6">
                   <FaStar className="text-white" /> {/* Star icon */}
                 </div>
-                <p className="text-sm text-gray-600 font-semibold">
+                <p className="text-sm text-gray-600 font-semibold" style={{ color: theme.subtextColor }}>
                   {item.rating} / 5
                 </p>
               </div>
             </div>
 
-            <span className="font-bold text-lg price flex mt-1">
+            <span className="font-bold text-lg price flex mt-1" style={{ color: theme.textColor }}>
               <span className="font-Poppins">Rs.</span>{" "}
               {item.defaultPrice ? item.defaultPrice : item.price}
             </span>
-          
           </div>
         </div>
       ))}

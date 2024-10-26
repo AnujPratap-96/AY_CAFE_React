@@ -3,15 +3,15 @@ import { useState } from "react";
 import { FaChevronDown, FaChevronUp, FaStar } from "react-icons/fa"; // Import icons
 import { LuSquareDot } from "react-icons/lu";
 import { addItem } from "../store/cartSlice";
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-
-
+import { useSelector } from "react-redux"; // Importing useSelector
 
 export default function GetMenu({ restaurant }) {
   const [activeCategory, setActiveCategory] = useState(null);
   const foodItemsByCategory = useExtractFoodItems(restaurant);
   const dispatch = useDispatch();
+  const theme = useSelector((store) => store.sidebar.theme); // Access theme from Redux
 
   const handleAddItem = (item) => {
     dispatch(addItem(item));
@@ -25,12 +25,13 @@ export default function GetMenu({ restaurant }) {
   };
 
   return (
-    <div className="p-6 bg-gray-50 rounded-md">
+    <div className="p-6" style={{ backgroundColor: theme.backgroundColor }} > {/* Updated background color */}
       {Object.keys(foodItemsByCategory).map((category, index) => (
-        <div key={index} className="mb-3 bg-gray-100 rounded-xl">
+        <div key={index} className="mb-3  rounded-xl p-2 shadow-md">
           {/* Clickable header for categories */}
           <h2
-            className="cursor-pointer flex items-center justify-between text-xl font-semibold font-poppins text-black py-3 mb-4  px-5"
+            className="cursor-pointer flex items-center justify-between text-xl font-semibold font-poppins"
+            style={{ color: theme.textColor }} // Updated text color
             onClick={() => toggleCategory(category)}
           >
             {category}
@@ -46,16 +47,17 @@ export default function GetMenu({ restaurant }) {
               {foodItemsByCategory[category].map((item) => (
                 <div
                   key={item.id}
-                  className="border rounded-lg shadow-md p-4 bg-white flex items-center justify-between hover:shadow-lg transition-shadow duration-200"
+                  className="border rounded-lg shadow-md p-4 flex items-center justify-between hover:shadow-lg transition-shadow duration-200"
+                  style={{ backgroundColor: theme.backgroundColor }} // Updated item background color
                 >
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-1">
+                    <h3 className="text-xl font-semibold" style={{ color: theme.textColor }}>
                       {item.name}
                     </h3>
                     <p
                       className={`text-sm ${
                         item.isVeg ? "text-green-600" : "text-red-600"
-                      } font-semibold `}
+                      } font-semibold`}
                     >
                       <LuSquareDot
                         style={{ color: item.isVeg ? "#16A34A" : "#DC2626", fontSize: "24px" }}
@@ -63,8 +65,10 @@ export default function GetMenu({ restaurant }) {
                       />
                       {item.isVeg ? "Veg" : "Non-Veg"}
                     </p>
-                    <p className="text-gray-700 mt-2">₹{item.price}</p>
-                    <p className="text-gray-500 mt-1 flex items-center">
+                    <p className="mt-2" style={{ color: theme.subtextColor }}>
+                      ₹{item.price}
+                    </p>
+                    <p className="mt-1 flex items-center" style={{ color: theme.subtextColor }}>
                       {item.rating}
                       <FaStar className="text-white bg-green-500 text-md rounded-lg px-1 mt-1 ml-1" />
                     </p>
