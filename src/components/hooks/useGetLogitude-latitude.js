@@ -1,9 +1,9 @@
 import { setCityName , setLatitude , setLongitude , setStateName } from "../store/sidebarSlice";
-const apiKey = process.env.REACT_APP_API_KEY;
+
 export const handleClick = async (cityName , dispatch) => {
    
     try {
-      const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`);
+      const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=eabd2a24e8da184b83a46df7bf32eeb3`);
       const data = await response.json();
       console.log(data);
     const {name , lon , lat , state} = data[0];

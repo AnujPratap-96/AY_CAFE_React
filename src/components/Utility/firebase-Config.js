@@ -2,10 +2,10 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-const firebaseApi = process.env.REACT_APP_API_FIREBASE_KEY;
+
 
 const firebaseConfig = {
-  apiKey: `${firebaseApi}`,
+  apiKey: `AIzaSyA01WIyjgKyyq74cNNjnM3_678_V4qKgTc`,
   authDomain: "login-signup-aps.firebaseapp.com",
   projectId: "login-signup-aps",
   storageBucket: "login-signup-aps.appspot.com",
