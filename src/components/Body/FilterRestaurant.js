@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { filterData } from "../hooks/filterData";
+import { useSelector } from "react-redux";
 
 export const FilterRestaurant = ({
   allrestaurant,
@@ -140,7 +141,7 @@ export const SearchInputBox = ({
   searchInput,
   setSearchInput
 }) => {
-  
+  const theme = useSelector((store) => store.sidebar.theme);
   // Update filteredRestaurants whenever searchInput changes
   useEffect(() => {
     if (searchInput.length === 0) {
@@ -166,6 +167,7 @@ export const SearchInputBox = ({
       value={searchInput}
       onChange={(e) => setSearchInput(e.target.value)} // Just set input
       className="border border-gray-300 rounded-lg p-2 h-12 w-full sm:w-64 focus:outline-none focus:border-orange-500 focus:ring-0"
+      style={{backgroundColor : theme.backgroundColor , color : theme.textColor} }
     />
   );
 };
