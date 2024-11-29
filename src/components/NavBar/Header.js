@@ -68,7 +68,7 @@ export default function Header() {
         </div>
       </div>
 
-      <header className="shadow-lg sticky top-0 z-40 py-3 px-2" style={{ backgroundColor: theme.backgroundColor, color: theme.textColor }}>
+      <header className="shadow-lg sticky top-0 z-40 py-3 px-4" style={{ backgroundColor: theme.backgroundColor, color: theme.textColor }}>
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           
           {/* Container for Logo and City/State Details */}
