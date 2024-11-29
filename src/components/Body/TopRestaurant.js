@@ -4,7 +4,11 @@ import { FaArrowLeft, FaArrowRight, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const TopRestaurantChains = ({ topRestaurantHeader, TopRestaurant, cityName }) => {
+const TopRestaurantChains = ({
+  topRestaurantHeader,
+  TopRestaurant,
+  cityName,
+}) => {
   const ScrollBar = useRef();
   const theme = useSelector((store) => store.sidebar.theme); // Access theme from Redux
 
@@ -23,7 +27,9 @@ const TopRestaurantChains = ({ topRestaurantHeader, TopRestaurant, cityName }) =
           className="text-lg lg:text-2xl font-bold ml-3 font-Poppins"
           style={{ color: theme.textColor }}
         >
-          {topRestaurantHeader ? topRestaurantHeader.title : `Top restaurant chains in ${cityName}`}
+          {topRestaurantHeader
+            ? topRestaurantHeader.title
+            : `Top restaurant chains in ${cityName}`}
         </h1>
         <span className="flex gap-3 self-end">
           <span>
@@ -85,23 +91,26 @@ const TopRestaurantChains = ({ topRestaurantHeader, TopRestaurant, cityName }) =
                 <div className="flex items-center gap-1 mb-2">
                   <div className="flex items-center gap-1">
                     {/* Rating Icon */}
-                    <span
-                      className="p-1 rounded-full text-xs font-bold flex items-center"
-                      style={{ backgroundColor: theme.ratingBgColor }}
-                    >
-                      <FaStar style={{ color: theme.textColor }} />
+                    <span className="bg-green-500 p-1 rounded-full text-xs font-bold flex items-center">
+                      <FaStar className="text-white" />
                     </span>
                     <span
                       className="text-sm font-medium"
                       style={{ color: theme.subtextColor }}
                     >
-                      {res?.info?.avgRating}
+                      {isNaN(res?.info?.avgRating) ? 4.0 : res?.info?.avgRating}
                     </span>
                   </div>
-                  <span className="flex items-center" style={{ color: theme.subtextColor }}>
+                  <span
+                    className="flex items-center"
+                    style={{ color: theme.subtextColor }}
+                  >
                     •
                   </span>
-                  <p className="text-sm font-medium" style={{ color: theme.subtextColor }}>
+                  <p
+                    className="text-sm font-medium"
+                    style={{ color: theme.subtextColor }}
+                  >
                     ⏰{res?.info?.sla?.slaString}
                   </p>
                 </div>
